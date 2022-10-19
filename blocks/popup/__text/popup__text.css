@@ -1,0 +1,29 @@
+.popup__text {
+  width: 358px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 30px auto 0;
+  box-sizing: border-box;
+  padding: 0 0 9px;
+  border: 0;
+  border-bottom: 1px solid #545454;
+  font-family: inherit;
+}
+
+.popup__text:first-of-type {
+  margin-top: 48px;
+}
+
+.popup__text:focus {
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .popup__text {
+    width: 238px;
+  }
+  .popup__text:first-of-type {
+    margin-top: 75px;
+  }
+}

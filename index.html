@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Места России</title>
+    <link rel="stylesheet" href="./pages/index.css">
+  </head>
+  <body class="page">
+    <header class="header">
+      <img
+        src="./images/header/header__logo.svg"
+        alt="Логотип"
+        class="header__logo">
+    </header>
+    <main>
+      <section class="profile">
+        <div class="profile__card">
+          <img
+            src="./images/body/profile/__avatar/profile__avatar.png"
+            alt="Ваш аватар"
+            class="profile__avatar">
+          <div class="profile__profile-info">
+            <div>
+              <h1 id="profile-name" class="profile__profile-text">
+                Жак-Ив Кусто
+              </h1>
+              <p id="profile-job" class="profile__profile-text">
+                Исследователь океана
+              </p>
+            </div>
+            <button
+              class="profile__edit-button transition-button"
+              type="button"
+            ></button>
+          </div>
+        </div>
+        <button
+          class="profile__add-button transition-button"
+          type="button"
+        ></button>
+      </section>
+      <section class="elements">
+        <ul class="elements__list">
+          <li>
+            <figure class="elements__element">
+              <img
+                class="elements__top-side"
+                src="./images/body/elements/__element/elements__element_Karachaevsk.jpg"
+                alt="Фото - Карачаевcк">
+              <figcaption class="elements__bottom-side">
+                <h2 class="elements__caption">Карачаевcк</h2>
+                <button
+                  class="elements__button-like transition-button"
+                  type="button"
+                ></button>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="elements__element">
+              <img
+                class="elements__top-side"
+                src="./images/body/elements/__element/elements__element_Mountain-Elbrus.jpg"
+                alt="Фото - Гора Эльбрус">
+              <figcaption class="elements__bottom-side">
+                <h2 class="elements__caption">Гора Эльбрус</h2>
+                <button
+                  class="elements__button-like transition-button"
+                  type="button"
+                ></button>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="elements__element">
+              <img
+                class="elements__top-side"
+                src="./images/body/elements/__element/elements__element_Dombay.jpg"
+                alt="Фото - Домбай">
+              <figcaption class="elements__bottom-side">
+                <h2 class="elements__caption">Домбай</h2>
+                <button
+                  class="elements__button-like transition-button"
+                  type="button"
+                ></button>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="elements__element">
+              <img
+                class="elements__top-side"
+                src="./images/body/elements/__element/elements__element_Mountain-Elbrus.jpg"
+                alt="Фото - Гора Эльбрус">
+              <figcaption class="elements__bottom-side">
+                <h2 class="elements__caption">Гора Эльбрус</h2>
+                <button
+                  class="elements__button-like transition-button"
+                  type="button"
+                ></button>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="elements__element">
+              <img
+                class="elements__top-side"
+                src="./images/body/elements/__element/elements__element_Dombay.jpg"
+                alt="Фото - Домбай">
+              <figcaption class="elements__bottom-side">
+                <h2 class="elements__caption">Домбай</h2>
+                <button
+                  class="elements__button-like transition-button"
+                  type="button"
+                ></button>
+              </figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="elements__element">
+              <img
+                class="elements__top-side"
+                src="./images/body/elements/__element/elements__element_Karachay-Cherkessia.jpg"
+                alt="Фото - Карачаево-Черкесия">
+              <figcaption class="elements__bottom-side">
+                <h2 class="elements__caption">Карачаево-Черкесия</h2>
+                <button
+                  class="elements__button-like transition-button"
+                  type="button"
+                ></button>
+              </figcaption>
+            </figure>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">© 2022 Александр&nbsp;Макаров</p>
+    </footer>
+    <section class="popup">
+      <form class="popup__container">
+        <button class="popup__close transition-button" type="reset"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input
+          id="popup-text-name"
+          class="popup__text"
+          type="text"
+          value="Жак-Ив Кусто"
+          autocomplete="off">
+        <input
+          id="popup-text-job"
+          class="popup__text"
+          type="text"
+          value="Исследователь океана"
+          autocomplete="off">
+        <button type="submit" class="popup__save transition-button">
+          Сохранить
+        </button>
+      </form>
+    </section>
+    <script src="./scripts/index.js"></script>
+  </body>
+</html>

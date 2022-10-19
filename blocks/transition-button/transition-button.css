@@ -1,0 +1,8 @@
+.transition-button {
+  opacity: 1;
+  transition: opacity 0.15s linear;
+}
+
+.transition-button:hover {
+  opacity: 0.6;
+}

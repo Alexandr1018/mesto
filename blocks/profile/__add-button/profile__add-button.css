@@ -1,0 +1,17 @@
+.profile__add-button {
+  width: 150px;
+  height: 50px;
+  background: transparent center no-repeat
+    url("../../../images/body/profile/__add-button/profile__add-button.svg");
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+}
+
+@media (max-width: 680px) {
+  .profile__add-button {
+    width: 282px;
+    margin-top: 33px;
+    background-image: url("../../../images/body/profile/__add-button/profile__add-button_mobile.svg");
+  }
+}

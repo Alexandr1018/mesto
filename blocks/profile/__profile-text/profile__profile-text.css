@@ -1,0 +1,32 @@
+.profile__profile-text {
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  max-width: 294px;
+}
+
+.profile__profile-text:last-child {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  margin-top: 8px;
+}
+
+@media (max-width: 370px) {
+  .profile__profile-text {
+    font-size: 27px;
+    line-height: 33px;
+    text-align: center;
+  }
+
+  .profile__profile-text:last-child {
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 7px;
+  }
+}
