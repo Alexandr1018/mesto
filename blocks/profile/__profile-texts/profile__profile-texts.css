@@ -1,0 +1,4 @@
+.profile__profile-texts {
+  display: flex;
+  flex-direction: column;
+}

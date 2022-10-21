@@ -21,13 +21,9 @@
             alt="Ваш аватар"
             class="profile__avatar">
           <div class="profile__profile-info">
-            <div>
-              <h1 id="profile-name" class="profile__profile-text">
-                Жак-Ив Кусто
-              </h1>
-              <p id="profile-job" class="profile__profile-text">
-                Исследователь океана
-              </p>
+            <div class="profile__profile-texts">
+              <h1 class="profile__profile-text profile__profile-text_name">Жак-Ив Кусто</h1>
+              <p class="profile__profile-text profile__profile-text_job">Исследователь океана</p>
             </div>
             <button
               class="profile__edit-button transition-button"
@@ -43,94 +39,94 @@
       <section class="elements">
         <ul class="elements__list">
           <li>
-            <figure class="elements__element">
+            <article class="elements__element">
               <img
                 class="elements__top-side"
                 src="./images/body/elements/__element/elements__element_Karachaevsk.jpg"
                 alt="Фото - Карачаевcк">
-              <figcaption class="elements__bottom-side">
+              <div class="elements__bottom-side">
                 <h2 class="elements__caption">Карачаевcк</h2>
                 <button
                   class="elements__button-like transition-button"
                   type="button"
                 ></button>
-              </figcaption>
-            </figure>
+              </div>
+            </article>
           </li>
           <li>
-            <figure class="elements__element">
+            <article class="elements__element">
               <img
                 class="elements__top-side"
                 src="./images/body/elements/__element/elements__element_Mountain-Elbrus.jpg"
                 alt="Фото - Гора Эльбрус">
-              <figcaption class="elements__bottom-side">
+              <div class="elements__bottom-side">
                 <h2 class="elements__caption">Гора Эльбрус</h2>
                 <button
                   class="elements__button-like transition-button"
                   type="button"
                 ></button>
-              </figcaption>
-            </figure>
+              </div>
+            </article>
           </li>
           <li>
-            <figure class="elements__element">
+            <article class="elements__element">
               <img
                 class="elements__top-side"
                 src="./images/body/elements/__element/elements__element_Dombay.jpg"
                 alt="Фото - Домбай">
-              <figcaption class="elements__bottom-side">
+              <div class="elements__bottom-side">
                 <h2 class="elements__caption">Домбай</h2>
                 <button
                   class="elements__button-like transition-button"
                   type="button"
                 ></button>
-              </figcaption>
-            </figure>
+              </div>
+            </article>
           </li>
           <li>
-            <figure class="elements__element">
+            <article class="elements__element">
               <img
                 class="elements__top-side"
                 src="./images/body/elements/__element/elements__element_Mountain-Elbrus.jpg"
                 alt="Фото - Гора Эльбрус">
-              <figcaption class="elements__bottom-side">
+              <div class="elements__bottom-side">
                 <h2 class="elements__caption">Гора Эльбрус</h2>
                 <button
                   class="elements__button-like transition-button"
                   type="button"
                 ></button>
-              </figcaption>
-            </figure>
+              </div>
+            </article>
           </li>
           <li>
-            <figure class="elements__element">
+            <article class="elements__element">
               <img
                 class="elements__top-side"
                 src="./images/body/elements/__element/elements__element_Dombay.jpg"
                 alt="Фото - Домбай">
-              <figcaption class="elements__bottom-side">
+              <div class="elements__bottom-side">
                 <h2 class="elements__caption">Домбай</h2>
                 <button
                   class="elements__button-like transition-button"
                   type="button"
                 ></button>
-              </figcaption>
-            </figure>
+              </div>
+            </article>
           </li>
           <li>
-            <figure class="elements__element">
+            <article class="elements__element">
               <img
                 class="elements__top-side"
                 src="./images/body/elements/__element/elements__element_Karachay-Cherkessia.jpg"
                 alt="Фото - Карачаево-Черкесия">
-              <figcaption class="elements__bottom-side">
+              <div class="elements__bottom-side">
                 <h2 class="elements__caption">Карачаево-Черкесия</h2>
                 <button
                   class="elements__button-like transition-button"
                   type="button"
                 ></button>
-              </figcaption>
-            </figure>
+              </div>
+            </article>
           </li>
         </ul>
       </section>
@@ -139,25 +135,27 @@
       <p class="footer__copyright">© 2022 Александр&nbsp;Макаров</p>
     </footer>
     <section class="popup">
-      <form class="popup__container">
+      <div class="popup__container">
         <button class="popup__close transition-button" type="reset"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input
-          id="popup-text-name"
-          class="popup__text"
+        <form action="" class="popup__form" name="form-profile-changer">
+          <input
+          name="popup-text-name"
+          class="popup__text popup__text_name"
           type="text"
           value="Жак-Ив Кусто"
           autocomplete="off">
-        <input
-          id="popup-text-job"
-          class="popup__text"
+          <input
+          name="popup-text-job"
+          class="popup__text popup__text_job"
           type="text"
           value="Исследователь океана"
           autocomplete="off">
-        <button type="submit" class="popup__save transition-button">
+          <button type="submit" class="popup__save transition-button">
           Сохранить
-        </button>
-      </form>
+          </button>
+        </form>
+      </div>
     </section>
     <script src="./scripts/index.js"></script>
   </body>
