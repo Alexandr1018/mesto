@@ -1,4 +1,4 @@
-.profile__profile-text {
+.profile__profile-name {
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
@@ -9,24 +9,11 @@
   max-width: 294px;
 }
 
-.profile__profile-text:last-child {
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  margin-top: 8px;
-}
-
 @media (max-width: 370px) {
-  .profile__profile-text {
+  .profile__profile-name {
     font-size: 27px;
     line-height: 33px;
     text-align: center;
     max-width: 189px;
-  }
-
-  .profile__profile-text:last-child {
-    font-size: 14px;
-    line-height: 17px;
-    margin-top: 7px;
   }
 }

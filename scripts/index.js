@@ -3,10 +3,10 @@ const popupCloseButtonElement = popupElement.querySelector(".popup__close");
 const popupOpenButtonElement = document.querySelector(".profile__edit-button");
 const profileElement = document.querySelector(".profile");
 const formElement = popupElement.querySelector(".popup__form");
-const popupTextName = formElement.querySelector(".popup__text_name");
-const popupTextJob = formElement.querySelector(".popup__text_job");
-let profileName = profileElement.querySelector(".profile__profile-text_name");
-let profileJob = profileElement.querySelector(".profile__profile-text_job");
+const popupTextName = formElement.querySelector(".popup__text_input_name");
+const popupTextJob = formElement.querySelector(".popup__text_input_job");
+let profileName = profileElement.querySelector(".profile__profile-name");
+let profileJob = profileElement.querySelector(".profile__profile-job");
 
 // Делаем попап редактирования профиля: открытие попапа, закрытие попапа
 const togglePopupVisibility = function () {
