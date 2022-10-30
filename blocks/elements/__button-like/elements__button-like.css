@@ -1,8 +1,7 @@
 .elements__button-like {
   width: 22px;
   height: 19px;
-  background: transparent center
-    url("../../../images/body/elements/__like/elements__button-like_disabled.svg");
+  background: transparent center url("../../../images/body/elements/__like/elements__button-like_disabled.svg");
   cursor: pointer;
   padding: 0;
   border: 0;

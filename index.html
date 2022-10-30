@@ -38,103 +38,13 @@
       </section>
       <section class="elements" aria-label="Секция с фотографиями">
         <ul class="elements__list">
-          <li>
-            <article class="elements__element">
-              <img
-                class="elements__top-side"
-                src="./images/body/elements/__element/elements__element_Karachaevsk.jpg"
-                alt="Фото - Карачаевcк">
-              <div class="elements__bottom-side">
-                <h2 class="elements__caption">Карачаевcк</h2>
-                <button
-                  class="elements__button-like transition-button"
-                  type="button"
-                ></button>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="elements__element">
-              <img
-                class="elements__top-side"
-                src="./images/body/elements/__element/elements__element_Mountain-Elbrus.jpg"
-                alt="Фото - Гора Эльбрус">
-              <div class="elements__bottom-side">
-                <h2 class="elements__caption">Гора Эльбрус</h2>
-                <button
-                  class="elements__button-like transition-button"
-                  type="button"
-                ></button>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="elements__element">
-              <img
-                class="elements__top-side"
-                src="./images/body/elements/__element/elements__element_Dombay.jpg"
-                alt="Фото - Домбай">
-              <div class="elements__bottom-side">
-                <h2 class="elements__caption">Домбай</h2>
-                <button
-                  class="elements__button-like transition-button"
-                  type="button"
-                ></button>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="elements__element">
-              <img
-                class="elements__top-side"
-                src="./images/body/elements/__element/elements__element_Mountain-Elbrus.jpg"
-                alt="Фото - Гора Эльбрус">
-              <div class="elements__bottom-side">
-                <h2 class="elements__caption">Гора Эльбрус</h2>
-                <button
-                  class="elements__button-like transition-button"
-                  type="button"
-                ></button>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="elements__element">
-              <img
-                class="elements__top-side"
-                src="./images/body/elements/__element/elements__element_Dombay.jpg"
-                alt="Фото - Домбай">
-              <div class="elements__bottom-side">
-                <h2 class="elements__caption">Домбай</h2>
-                <button
-                  class="elements__button-like transition-button"
-                  type="button"
-                ></button>
-              </div>
-            </article>
-          </li>
-          <li>
-            <article class="elements__element">
-              <img
-                class="elements__top-side"
-                src="./images/body/elements/__element/elements__element_Karachay-Cherkessia.jpg"
-                alt="Фото - Карачаево-Черкесия">
-              <div class="elements__bottom-side">
-                <h2 class="elements__caption">Карачаево-Черкесия</h2>
-                <button
-                  class="elements__button-like transition-button"
-                  type="button"
-                ></button>
-              </div>
-            </article>
-          </li>
         </ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2022 Александр&nbsp;Макаров</p>
     </footer>
-    <section class="popup">
+    <section class="popup popup_profile-changer">
       <div class="popup__container">
         <button class="popup__close transition-button" type="reset"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -157,6 +67,58 @@
         </form>
       </div>
     </section>
+    <section class="popup popup_add-new-card">
+      <div class="popup__container">
+        <button class="popup__close transition-button" type="reset"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="form-new-card">
+          <input
+          name="popup-text-name"
+          class="popup__text popup__text_input_name-location"
+          type="text"
+          placeholder="Название"
+          autocomplete="off">
+          <input
+          name="popup-text-job"
+          class="popup__text popup__text_input_url"
+          type="url"
+          placeholder="Ссылка на картинку"
+          autocomplete="off">
+          <button type="submit" class="popup__save transition-button">
+          Создать
+          </button>
+        </form>
+      </div>
+    </section>
+    <section class="popup popup_photo-reveal" aria-label="Попап с увеличенными фото">
+      <div class="popup__photo-reveal">
+        <button class="popup__close transition-button" type="reset"></button>
+        <figure class="popup__figure">
+          <img class="popup__image-big" alt="Фотография в увеличенном виде" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+          <figcaption class="popup__image-caption"></figcaption>
+        </figure>
+      </div>
+    </section>
+    <template id="template-element">
+      <li class="template-element">
+        <article class="elements__element">
+          <button
+            class="elements__button-delete transition-button"
+            type="button"
+          ></button>
+          <img
+            class="elements__top-side transition-button"
+            alt="Фото России">
+          <div class="elements__bottom-side">
+            <h2 class="elements__caption"></h2>
+            <button
+              class="elements__button-like transition-button"
+              type="button"
+            ></button>
+          </div>
+        </article>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
