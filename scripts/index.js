@@ -49,27 +49,27 @@ const elementsList = document.querySelector(".elements__list");
 const preloadedCards = [
   {
     name: "Байкал",
-    link: "../images/body/elements/__element/elements__element_Baikal.jpg"
+    link: "https://images.unsplash.com/photo-1551845041-63e8e76836ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=689&q=80"
   },
   {
     name: "Иваново",
-    link: "../images/body/elements/__element/elements__element_Ivanovo.jpg"
+    link: "https://images.unsplash.com/photo-1527440050868-25ac612aae1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
   },
   {
     name: "Камчатка",
-    link: "../images/body/elements/__element/elements__element_Kamchatka.jpg"
+    link: "https://images.unsplash.com/photo-1557094005-176cbfe3554d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1634&q=80"
   },
   {
     name: "Красноярск",
-    link: "../images/body/elements/__element/elements__element_Krasnoyarsk.jpg"
+    link: "https://images.unsplash.com/photo-1587451152235-05466c2fc532?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
   },
   {
     name: "Москва",
-    link: "../images/body/elements/__element/elements__element_Moskva.jpg"
+    link: "https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
   },
   {
     name: "Тюмень",
-    link: "../images/body/elements/__element/elements__element_Tyumen.jpg"
+    link: "https://images.unsplash.com/photo-1621878983992-bac95a1e8dd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80"
   }
 ];
 
