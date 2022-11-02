@@ -31,6 +31,7 @@
 @import url("../blocks/popup/__form/popup__form.css");
 @import url("../blocks/popup/__text/popup__text.css");
 @import url("../blocks/popup/__save/popup__save.css");
+@import url("../blocks/popup/_photo/popup_photo.css");
 @import url("../blocks/popup/__photo-reveal/popup__photo-reveal.css");
 @import url("../blocks/popup/__figure/popup__figure.css");
 @import url("../blocks/popup/__image-big/popup__image-big.css");

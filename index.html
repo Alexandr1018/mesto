@@ -53,13 +53,14 @@
           name="popup-text-name"
           class="popup__text popup__text_input_name"
           type="text"
-          value="Жак-Ив Кусто"
-          autocomplete="off">
+          placeholder="Имя"
+          autocomplete="off"
+          required>
           <input
           name="popup-text-job"
           class="popup__text popup__text_input_job"
           type="text"
-          value="Исследователь океана"
+          placeholder="О себе"
           autocomplete="off">
           <button type="submit" class="popup__save transition-button">
           Сохранить
@@ -69,9 +70,9 @@
     </section>
     <section class="popup popup_add-new-card">
       <div class="popup__container">
-        <button class="popup__close transition-button" type="reset"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="form-new-card">
+          <button class="popup__close transition-button" type="reset"></button>
           <input
           name="popup-text-name"
           class="popup__text popup__text_input_name-location"
@@ -83,18 +84,19 @@
           class="popup__text popup__text_input_url"
           type="url"
           placeholder="Ссылка на картинку"
-          autocomplete="off">
+          autocomplete="off"
+          required>
           <button type="submit" class="popup__save transition-button">
           Создать
           </button>
         </form>
       </div>
     </section>
-    <section class="popup popup_photo-reveal" aria-label="Попап с увеличенными фото">
+    <section class="popup popup_photo" aria-label="Попап с увеличенными фото">
       <div class="popup__photo-reveal">
         <button class="popup__close transition-button" type="reset"></button>
         <figure class="popup__figure">
-          <img class="popup__image-big" alt="Фотография в увеличенном виде" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+          <img class="popup__image-big" alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
           <figcaption class="popup__image-caption"></figcaption>
         </figure>
       </div>
@@ -108,7 +110,7 @@
           ></button>
           <img
             class="elements__top-side transition-button"
-            alt="Фото России">
+            alt="">
           <div class="elements__bottom-side">
             <h2 class="elements__caption"></h2>
             <button
@@ -119,6 +121,7 @@
         </article>
       </li>
     </template>
+    <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
