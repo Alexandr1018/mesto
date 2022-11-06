@@ -57,16 +57,16 @@ const createNewCard = (link, name) => {
   userElement.querySelector(".elements__top-side").src = link;
   userElement.querySelector(".elements__caption").textContent = name;
   userElement.querySelector(".elements__top-side").alt = `Фото - ${name}`;
+  //вешаем слушатели
+  userElement.querySelector(".elements__button-like").addEventListener("click", likeCard);
+  userElement.querySelector(".elements__button-delete").addEventListener("click", deleteCard);
+  userElement.querySelector(".elements__top-side").addEventListener("click", openCard);
   return userElement;
 }
 
 // функция добавления созданной новой карточки
 const addNewCard = (link, name) => {
-  createNewCard(link, name);
   elementsContainer.prepend(createNewCard(link, name));
-  elementsContainer.querySelector(".elements__button-like").addEventListener("click", likeCard);
-  elementsContainer.querySelector(".elements__button-delete").addEventListener("click", deleteCard);
-  elementsContainer.querySelector(".elements__top-side").addEventListener("click", openCard);
 }
 
 // ПОПАП РЕДАКТИРОВАНИЯ ПРОФИЛЯ
@@ -96,8 +96,6 @@ formElementProfileChanger.addEventListener("submit", submitFormProfileChanger);
 //делаем функцию предзагрузки карточек с картинками
 preloadedCards.forEach( item => {
   addNewCard(item.link, item.name);
-  //увеличение предзагруженных картинок
-  // openCard();
 });
 
 // ПОПАП ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ
@@ -114,8 +112,6 @@ function submitFormAddNewCard(event) {
   closePopup(popupAddNewCard);
   // обнуляем поля в форме
   formElementAddNewCard.reset();
-  //увеличение предзагруженных картинок
-  // openCard();
 };
 formElementAddNewCard.addEventListener("submit", submitFormAddNewCard);
 
@@ -136,11 +132,12 @@ function closePopupPhotoRevealVisability() {
   popupPhotoRevealImageBig.src = "";
   popupPhotoRevealImageCaption.textContent = "";
 };
-//Слушатель на  открытие и закрытие попапа увеличения картинки
+//Слушатель на  закрытие попапа увеличения картинки
+popupClosePhoroRevealButton.addEventListener("click", closePopupPhotoRevealVisability);
+//функция открытия попапа увеличения картинки
 function openCard(evt) {
   popupPhotoRevealImageBig.src = evt.target.src;
   popupPhotoRevealImageCaption.textContent = evt.target.alt.split(" ").pop();
   popupPhotoRevealImageBig.alt = `Фото в увеличенном виде - ${evt.target.alt.split(" ").pop()}`;
   openPopup(popupPhoto);
-  popupClosePhoroRevealButton.addEventListener("click", closePopupPhotoRevealVisability);
 }
