@@ -8,8 +8,8 @@ const popupOpenButtonElement = document.querySelector(".profile__edit-button");
 // форма редактирования профиля
 const formElementProfileChanger = popupProfileChanger.querySelector(".popup__form");
 // инпуты формы редактирования профиля
-const popupTextName = formElementProfileChanger.querySelector(".popup__text_input_name");
-const popupTextJob = formElementProfileChanger.querySelector(".popup__text_input_job");
+const popupTextName = formElementProfileChanger.querySelector(".popup__input_text_name");
+const popupTextJob = formElementProfileChanger.querySelector(".popup__input_text_job");
 
 //Переменные попапа добавления новой карточки
 //переменная хранит попап добавления новой картинки
@@ -21,8 +21,8 @@ const popupAddNewCardOpenButton = document.querySelector(".profile__add-button")
 // форма редактирования профиля
 const formElementAddNewCard = popupAddNewCard.querySelector(".popup__form");
 // инпуты формы добавления новой карточки
-const popupTextLocationName = formElementAddNewCard.querySelector(".popup__text_input_name-location");
-const popupTextUrl = formElementAddNewCard.querySelector(".popup__text_input_url");
+const popupTextLocationName = formElementAddNewCard.querySelector(".popup__input_text_name-location");
+const popupTextUrl = formElementAddNewCard.querySelector(".popup__input_text_url");
 
 //Переменные попапа увеличения картинки
 //переменная хранит попап увеличения картинки
@@ -45,11 +45,27 @@ const profileJob = profileElement.querySelector(".profile__profile-job");
 const templateElement = document.querySelector("#template-element").content;
 const elementsContainer = document.querySelector(".elements__list");
 
+const popup = Array.from(document.querySelectorAll(".popup"));
 
 //функция открытия всех попапов
-const openPopup = popup => popup.classList.add("popup_opened");
+const openPopup = popup => {
+  popup.classList.add("popup_opened");
+  document.addEventListener('keydown', closePopupEsc);
+}
 //функция закрытия всех попапов
-const closePopup = popup => popup.classList.remove("popup_opened");
+const closePopup = popup => {
+  popup.classList.remove("popup_opened");
+  document.removeEventListener('keydown', closePopupEsc);
+}
+
+//Функция закрытия попапа по нажатию на Esc
+const closePopupEsc = evt => {
+  const popupOpenedElement = document.querySelector(".popup_opened");
+
+  if (evt.key === "Escape" && popupOpenedElement) {
+    closePopup(popupOpenedElement);
+  }
+}
 
 // функция создания новой карточки
 const createNewCard = (link, name) => {
@@ -58,11 +74,24 @@ const createNewCard = (link, name) => {
   userElement.querySelector(".elements__caption").textContent = name;
   userElement.querySelector(".elements__top-side").alt = `Фото - ${name}`;
   //вешаем слушатели
-  userElement.querySelector(".elements__button-like").addEventListener("click", likeCard);
-  userElement.querySelector(".elements__button-delete").addEventListener("click", deleteCard);
-  userElement.querySelector(".elements__top-side").addEventListener("click", openCard);
+  // userElement.querySelector(".elements__button-like").addEventListener("click", likeCard);
+  // userElement.querySelector(".elements__button-delete").addEventListener("click", deleteCard);
+  // userElement.querySelector(".elements__top-side").addEventListener("click", openCard);
   return userElement;
 }
+
+//ВЕШАЕМ СЛУШАТЕЛИ - открытие, лайк, удаление карточки
+elementsContainer.addEventListener('click', evt => {
+  if (evt.target.classList.contains('elements__button-like')) {
+    likeCard(evt);
+  }
+  if (evt.target.classList.contains('elements__button-delete')) {
+    deleteCard(evt);
+  }
+  if (evt.target.classList.contains('elements__top-side')) {
+    openCard(evt);
+  }
+});
 
 // функция добавления созданной новой карточки
 const addNewCard = (link, name) => {
@@ -141,3 +170,15 @@ function openCard(evt) {
   popupPhotoRevealImageBig.alt = `Фото в увеличенном виде - ${evt.target.alt.split(" ").pop()}`;
   openPopup(popupPhoto);
 }
+
+//Функция закрытия попапа по оверлею
+popup.forEach(popupElement => {
+  popupElement.addEventListener('click', evt => {
+    if (evt.target.classList.contains("popup")) {
+      closePopup(popupElement);
+    }
+  });
+});
+
+//Вызываем валидацию
+enableValidation(selectors);
