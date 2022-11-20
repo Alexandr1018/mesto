@@ -48,26 +48,12 @@ const popups = Array.from(document.querySelectorAll(".popup"));
 
 //функция открытия всех попапов
 const openPopup = popup => {
-
-  enableValidation(selectors);
-  /* popup.querySelectorAll('.popup__error').forEach((popupErrorElement) => {
-    popupErrorElement.textContent = '';
-  }); */
   popup.classList.add("popup_opened");
   document.addEventListener('keydown', closePopupEsc);
 }
 //функция закрытия всех попапов
 const closePopup = popup => {
   popup.classList.remove("popup_opened");
-
-  popup.querySelectorAll('.popup__input').forEach((popupInputElement) => {
-    popupInputElement.classList.remove('popup__input_type_error');
-  });
-
-  popup.querySelectorAll('.popup__error').forEach((popupErrorElement) => {
-    popupErrorElement.textContent = '';
-  });
-
   document.removeEventListener('keydown', closePopupEsc);
 }
 
@@ -94,19 +80,6 @@ const createNewCard = (link, name) => {
   return userElement;
 }
 
-//ВЕШАЕМ СЛУШАТЕЛИ - открытие, лайк, удаление карточки
-/* elementsContainer.addEventListener('click', evt => {
-  if (evt.target.classList.contains('elements__button-like')) {
-    likeCard(evt);
-  }
-  if (evt.target.classList.contains('elements__button-delete')) {
-    deleteCard(evt);
-  }
-  if (evt.target.classList.contains('elements__top-side')) {
-    openCard(evt);
-  }
-}); */
-
 // функция добавления созданной новой карточки
 const addNewCard = (link, name) => {
   elementsContainer.prepend(createNewCard(link, name));
@@ -118,6 +91,11 @@ const openPopupProfileChanger =  () => {
   // заменяем значения в форме, на те, что отображабтся на странице
   popupTextName.value = profileName.textContent;
   popupTextJob.value = profileJob.textContent;
+  //удаляем ошибки валидации
+  deleteValidityErrors(popupProfileChanger, selectors);
+  //делаем кнопку сабмита неактивной
+  disableButtonSubmit(popupProfileChanger, selectors);
+  //открываем попап
   openPopup(popupProfileChanger);
 };
 //Слушатели на открытие и закрытие попапа редактирования профиля
@@ -143,7 +121,14 @@ preloadedCards.forEach( item => {
 
 // ПОПАП ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ
 // Делаем попап добавления новой карточки: открытие попапа, закрытие попапа
-popupAddNewCardOpenButton.addEventListener("click", () => openPopup(popupAddNewCard));
+popupAddNewCardOpenButton.addEventListener("click", () => {
+  //удаляем ошибки валидации
+  deleteValidityErrors(popupAddNewCard, selectors);
+  //делаем кнопку сабмита неактивной
+  disableButtonSubmit(popupAddNewCard, selectors);
+  //открываем попап
+  openPopup(popupAddNewCard)
+});
 popupAddNewCardCloseButton.addEventListener("click", () => closePopup(popupAddNewCard));
 //функция подтверждения добавления новой карточки
 function submitFormAddNewCard(event) {
@@ -196,4 +181,6 @@ popups.forEach(popupElement => {
 });
 
 //Вызываем валидацию
-//enableValidation(selectors);
+
+
+enableValidation(selectors);

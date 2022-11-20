@@ -3,6 +3,7 @@ const selectors = {
   selectorForm: '.popup__form',
   selectorInput: '.popup__input',
   selectorButton: '.popup__button',
+  selectorError: '.popup__error',
   classButtonDisabled: 'popup__button_disabled',
   classInputTypeError: 'popup__input_type_error',
   classErrorVisible: 'popup__error_visible'
@@ -20,7 +21,8 @@ const checkInputsValidity = (formElement, selectors) => {
   const inputList = Array.from(formElement.querySelectorAll(selectors.selectorInput));
   const buttonElement = formElement.querySelector(selectors.selectorButton);
 
-  toggleButtonSubmit(inputList, buttonElement, selectors);
+  //дизейблим кнопку сабмита по умолчанию при открытии попапов
+  //toggleButtonSubmit(inputList, buttonElement, selectors);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
@@ -70,3 +72,18 @@ const isFormInputsValid = (inputList) => {
   });
 }
 
+//отдельная функция удаления ошибок валидации
+const deleteValidityErrors = (popupName, selectors) => {
+  popupName.querySelectorAll(selectors.selectorInput).forEach((popupInputElement) => {
+    popupInputElement.classList.remove('popup__input_type_error');
+  });
+
+  popupName.querySelectorAll(selectors.selectorError).forEach((popupErrorElement) => {
+    popupErrorElement.textContent = '';
+  });
+}
+
+const disableButtonSubmit = (popupName, selectors) => {
+    popupName.querySelector(selectors.selectorButton).setAttribute("disabled", true);
+    popupName.querySelector(selectors.selectorButton).classList.add(selectors.classButtonDisabled);
+}
