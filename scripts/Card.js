@@ -16,7 +16,7 @@ class Card {
     this._buttonLike = this._element.querySelector(".elements__button-like");
     this._buttonLike.addEventListener("click", () => this._likeCard());
     this._element.querySelector(".elements__button-delete").addEventListener("click", () => this._deleteCard());
-    this._elementTopSide.addEventListener("click", () => this._openCard(this._elementTopSide));
+    this._elementTopSide.addEventListener("click", () => this._openCard(this._data));
   }
   _likeCard() {
     this._buttonLike.classList.toggle("elements__button-like_active");

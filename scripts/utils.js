@@ -74,17 +74,12 @@ const formElementAddNewCard = popupAddNewCard.querySelector(".popup__form");
 const popupTextLocationName = formElementAddNewCard.querySelector(".popup__input_text_name-location");
 const popupTextUrl = formElementAddNewCard.querySelector(".popup__input_text_url");
 
-//ОБЩИЕ ФУНКЦИИ
-//Функция закрытия попапа по оверлею
+//ОБЩИЕ
 const popups = Array.from(document.querySelectorAll(".popup"));
+const popupTemplate = Array.from(document.querySelectorAll('.popup__form'));
+const buttonCloseList = document.querySelectorAll('.popup__close');
 
-const popupTemplate = document.querySelectorAll('.popup__form');
-
-// функция создания карточки
-function createCard(card) {
-  const cardElement = card.generateCard();
-  elementsContainer.prepend(cardElement);
-  }
+const formValidatorList = {};
 
 
-export {preloadedCards, selectors, elementsContainer, template, popupPhoto, popupPhotoRevealImageBig, popupPhotoRevealImageCaption, popupClosePhoroRevealButton, popupProfileChanger, popupCloseProfileButton, popupOpenButtonElement, profileName, profileJob, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCard, popupAddNewCardCloseButton, popupAddNewCardOpenButton, formElementAddNewCard, popupTextLocationName, popupTextUrl, popups, popupTemplate, createCard};
+export {preloadedCards, selectors, elementsContainer, template, popupPhoto, popupPhotoRevealImageBig, popupPhotoRevealImageCaption, popupProfileChanger,  popupOpenButtonElement, profileName, profileJob, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCard, popupAddNewCardOpenButton, formElementAddNewCard, popupTextLocationName, popupTextUrl, popups, popupTemplate, buttonCloseList, formValidatorList};

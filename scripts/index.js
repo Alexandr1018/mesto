@@ -1,15 +1,14 @@
-
-import {preloadedCards, selectors, template, popupPhoto, popupPhotoRevealImageBig, popupPhotoRevealImageCaption, popupClosePhoroRevealButton, popupProfileChanger, popupCloseProfileButton, popupOpenButtonElement, profileName, profileJob, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCard, popupAddNewCardCloseButton, popupAddNewCardOpenButton, formElementAddNewCard, popupTextLocationName, popupTextUrl, popups, popupTemplate, createCard} from './utils.js';
+import {preloadedCards, selectors, elementsContainer, template, popupPhoto, popupPhotoRevealImageBig, popupPhotoRevealImageCaption, popupProfileChanger,  popupOpenButtonElement, profileName, profileJob, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCard, popupAddNewCardOpenButton, formElementAddNewCard, popupTextLocationName, popupTextUrl, popups, popupTemplate, buttonCloseList, formValidatorList} from './utils.js';
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 
 
 //ПОПАП увеличения картинки -------------------------------------------------------------------------------------------------------------------
-const openCard = (evt) => {
-  const elementCaptionTextContent = evt.closest('.elements__element').querySelector('.elements__caption').textContent;
-  popupPhotoRevealImageBig.src = evt.src;
-  popupPhotoRevealImageCaption.textContent = elementCaptionTextContent;
-  popupPhotoRevealImageBig.alt = `Фото в увеличенном виде - ${elementCaptionTextContent}`;
+const openCard = (data) => {
+  // const elementCaptionTextContent = evt.closest('.elements__element').querySelector('.elements__caption').textContent;
+  popupPhotoRevealImageBig.src = data.link;
+  popupPhotoRevealImageCaption.textContent = data.name;
+  popupPhotoRevealImageBig.alt = `Фото в увеличенном виде - ${data.name}`;
   openPopup(popupPhoto);
 }
 
@@ -29,14 +28,11 @@ const closePopup = popup => {
   document.removeEventListener('keydown', closePopupEsc);
 }
 
-function closePopupPhotoRevealVisability() {
+/* function closePopupPhotoRevealVisability() {
   closePopup(popupPhoto);
   popupPhotoRevealImageBig.src = "";
   popupPhotoRevealImageCaption.textContent = "";
-};
-
-//ставим слушатель закрытия попапа
-popupClosePhoroRevealButton.addEventListener("click", closePopupPhotoRevealVisability);
+}; */
 //-------------------------------------------------------------------------------------------------------------------
 
 
@@ -47,15 +43,14 @@ const openPopupProfileChanger =  () => {
   popupTextName.value = profileName.textContent;
   popupTextJob.value = profileJob.textContent;
   //удаляем ошибки валидации
-  new FormValidator(formElementProfileChanger, selectors).deleteValidityErrors();
+  formValidatorList[formElementProfileChanger.name].deleteValidityErrors();
   //делаем кнопку сабмита неактивной
-  new FormValidator(formElementProfileChanger, selectors).disableButtonSubmit();
+  formValidatorList[formElementProfileChanger.name].disableButtonSubmit();
   //открываем попап
   openPopup(popupProfileChanger);
 };
 //Слушатели на открытие и закрытие попапа редактирования профиля
 popupOpenButtonElement.addEventListener("click", openPopupProfileChanger);
-popupCloseProfileButton.addEventListener("click", () => closePopup(popupProfileChanger));
 // Делаем попап редактирования профиля: подтверждение нового профиля
 function submitFormProfileChanger(evt) {
   // отменяем стандартное поведение кнопки при нажатии
@@ -73,13 +68,12 @@ formElementProfileChanger.addEventListener("submit", submitFormProfileChanger);
 // Делаем попап добавления новой карточки: открытие попапа, закрытие попапа
 popupAddNewCardOpenButton.addEventListener("click", () => {
   //удаляем ошибки валидации
-  new FormValidator(formElementAddNewCard, selectors).deleteValidityErrors();
+  formValidatorList[formElementAddNewCard.name].deleteValidityErrors();
   //делаем кнопку сабмита неактивной
-  new FormValidator(formElementAddNewCard, selectors).disableButtonSubmit();
+  formValidatorList[formElementAddNewCard.name].disableButtonSubmit();
   //открываем попап
   openPopup(popupAddNewCard)
 });
-popupAddNewCardCloseButton.addEventListener("click", () => closePopup(popupAddNewCard));
 //функция подтверждения добавления новой карточки
 function submitFormAddNewCard(event) {
   // отменяем стандартное поведение кнопки при нажатии
@@ -88,8 +82,7 @@ function submitFormAddNewCard(event) {
       name: popupTextLocationName.value,
       link: popupTextUrl.value
     }
-   const cardNew = new Card (formElementCardInfo, template, openCard);
-  createCard(cardNew);
+  insertCard(formElementCardInfo);
   // закрываем попап
   closePopup(popupAddNewCard);
   // обнуляем поля в форме
@@ -108,12 +101,30 @@ popups.forEach(popupElement => {
   });
 });
 
-preloadedCards.forEach(item => {
-  const cardsDefault = new Card (item, template, openCard);
-  createCard(cardsDefault);
+//Функция закрытия попапа по кнопке закрытия
+buttonCloseList.forEach(button => {
+  const popupCloser = button.closest('.popup');
+  button.addEventListener("click", () => closePopup(popupCloser));
 });
+
+// функция создания карточки
+function createCard(element) {
+  const cardsDefault1 = new Card (element, template, openCard);
+  const cardElement = cardsDefault1.generateCard();
+  return cardElement;
+}
+
+// функция вставки карточки в разметку
+function insertCard(element) {
+  elementsContainer.prepend(createCard(element));
+}
+
+preloadedCards.forEach(item => {
+  insertCard(item);
+});
+
 
 popupTemplate.forEach(item => {
-  new FormValidator(item, selectors).enableValidation();
+  formValidatorList[item.name] = new FormValidator(item, selectors);
+  formValidatorList[item.name].enableValidation();
 });
-

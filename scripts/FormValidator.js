@@ -8,27 +8,23 @@ class FormValidator {
     this._classButtonDisabled = selectors.classButtonDisabled;
     this._classInputTypeError = selectors.classInputTypeError;
     this._classErrorVisible = selectors.classErrorVisible;
+    this._buttonElement = this._formElement.querySelector(this._selectorButton);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._selectorInput));
   }
 
 //отдельная функция удаления ошибок валидации
-  deleteValidityErrors = (popupName, selectors) => {
-    this._formElement.querySelectorAll(this._selectorInput).forEach((popupInputElement) => {
-      popupInputElement.classList.remove(this._classInputTypeError);
-    });
-    this._formElement.querySelectorAll(this._selectorError).forEach((popupErrorElement) => {
-      popupErrorElement.textContent = '';
+  deleteValidityErrors() {
+    this._inputList.forEach((inputElement) => {
+      this._hideErrorMessage(inputElement);
     });
   }
 
   disableButtonSubmit() {
-    this._buttonElement = this._formElement.querySelector(this._selectorButton);
     this._buttonElement.setAttribute("disabled", true);
     this._buttonElement.classList.add(this._classButtonDisabled);
   }
 
   enableValidation() {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._selectorInput));
-    this._buttonElement = this._formElement.querySelector(this._selectorButton);
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isInputValid(inputElement);
@@ -61,8 +57,7 @@ class FormValidator {
 
   _toggleButtonSubmit() {
     if (this._isFormInputsValid()) {
-      this._buttonElement.setAttribute("disabled", true);
-      this._buttonElement.classList.add(this._classButtonDisabled);
+      this.disableButtonSubmit();
     } else {
       this._buttonElement.removeAttribute("disabled");
       this._buttonElement.classList.remove(this._classButtonDisabled);
