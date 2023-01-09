@@ -42,13 +42,13 @@ const template = "#template-element";
 const popupPhoto = document.querySelector(".popup_photo");
 const popupPhotoRevealImageBig = popupPhoto.querySelector(".popup__image-big");
 const popupPhotoRevealImageCaption = popupPhoto.querySelector(".popup__image-caption");
-const popupClosePhoroRevealButton = popupPhoto.querySelector(".popup__close");
+// const popupClosePhoroRevealButton = popupPhoto.querySelector(".popup__close");
 
 // ПОПАП редактирования профиля--------------------------------------------------------------------------------------
 //переменная хранит попап редактирования профиля
 const popupProfileChanger = document.querySelector(".popup_profile-changer");
 //кнопка закрытия попапа редактирования профиля
-const popupCloseProfileButton = popupProfileChanger.querySelector(".popup__close");
+// const popupCloseProfileButton = popupProfileChanger.querySelector(".popup__close");
 //кнопка открытия попапа редактирования профиля
 const popupOpenButtonElement = document.querySelector(".profile__edit-button");
 //переменные секции профиля
@@ -65,7 +65,7 @@ const popupTextJob = formElementProfileChanger.querySelector(".popup__input_text
 //переменная хранит попап добавления новой картинки
 const popupAddNewCard = document.querySelector(".popup_add-new-card");
 //кнопка закрытия попапа добавления карточки
-const popupAddNewCardCloseButton = popupAddNewCard.querySelector(".popup__close");
+// const popupAddNewCardCloseButton = popupAddNewCard.querySelector(".popup__close");
 //кнопка открытия попапа добавления карточки
 const popupAddNewCardOpenButton = document.querySelector(".profile__add-button");
 // форма редактирования профиля

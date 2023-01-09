@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Места России</title>
-    <link rel="stylesheet" href="./pages/index.css">
+    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
   </head>
   <body class="page">
     <header class="header">
       <img
-        src="./images/header/header__logo.svg"
+        src="<%=require('./images/header/header__logo.svg')%>"
         alt="Логотип"
         class="header__logo">
     </header>
@@ -17,7 +17,7 @@
       <section class="profile">
         <div class="profile__card">
           <img
-            src="./images/body/profile/__avatar/profile__avatar.png"
+            src="<%=require('./images/body/profile/__avatar/profile__avatar.png')%>"
             alt="Ваш аватар"
             class="profile__avatar">
           <div class="profile__profile-info">
@@ -133,6 +133,6 @@
         </article>
       </li>
     </template>
-    <script type="module" src="./scripts/index.js"></script>
+    <!-- <script type="module" src="./src/index.js"></script> -->
   </body>
 </html>
