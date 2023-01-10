@@ -1,6 +1,6 @@
 import './index.css';
 
-import {preloadedCards, selectors, elementsContainer, template, popupPhoto, popupPhotoRevealImageBig, popupPhotoRevealImageCaption, popupProfileChanger,  popupOpenButtonElement, profileName, profileJob, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCard, popupAddNewCardOpenButton, formElementAddNewCard, popupTextLocationName, popupTextUrl, popups, popupTemplate, buttonCloseList, formValidatorList} from '../components/utils';
+import {preloadedCards, selectors, elementsContainer, template, popupPhoto, popupPhotoRevealImageBig, popupPhotoRevealImageCaption, popupProfileChanger,  popupOpenButtonElement, profileName, profileJob, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCard, popupAddNewCardOpenButton, formElementAddNewCard, popupTextLocationName, popupTextUrl, popups, popupTemplateList, buttonCloseList, formValidatorList} from '../components/utils';
 import Card from '../components/Card';
 import FormValidator from '../components/FormValidator';
 import Section from '../components/Section';
@@ -22,8 +22,10 @@ const handleCardClick = (data) => {
 //Слушатели на открытие и закрытие попапа редактирования профиля
 popupOpenButtonElement.addEventListener("click", () => {
   // заменяем значения в форме, на те, что отображабтся на странице
-  popupTextName.value = userInformation.getUserInfo().name;
-  popupTextJob.value = userInformation.getUserInfo().info;
+  let formUserInfo = {};
+  formUserInfo = userInformation.getUserInfo();
+  popupTextName.value = formUserInfo.name;
+  popupTextJob.value = formUserInfo.info;
   //удаляем ошибки валидации
   formValidatorList[formElementProfileChanger.name].deleteValidityErrors();
   //делаем кнопку сабмита неактивной
@@ -31,16 +33,13 @@ popupOpenButtonElement.addEventListener("click", () => {
   //открываем попап
   formProfileChanger.open();
 });
-function submitFormProfileChanger(evt) {
-  // отменяем стандартное поведение кнопки при нажатии
-  evt.preventDefault();
+function submitFormProfileChanger(data) {
+  console.log(data);
   // заменяем значения полей в секции profile на введенные в форме
-  userInformation.setUserInfo(popupTextName.value, popupTextJob.value);
+  userInformation.setUserInfo(data);
   // закрываем попап
   formProfileChanger.close();
 };
-
-// formElementProfileChanger.addEventListener("submit", submitFormProfileChanger);
 //-------------------------------------------------------------------------------------------------------------------
 
 // ПОПАП ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ-----------------------------------------------------------------------------------
@@ -57,14 +56,8 @@ popupAddNewCardOpenButton.addEventListener("click", () => {
 
 // let newCardList = {};
 //функция подтверждения добавления новой карточки
-function submitFormAddNewCard(evt) {
-  // отменяем стандартное поведение кнопки при нажатии
-  evt.preventDefault();
-  const formElementCardInfo = {
-      name: popupTextLocationName.value,
-      link: popupTextUrl.value
-    }
-  cardsList.addItem(createCard(formElementCardInfo));
+function submitFormAddNewCard(data) {
+  cardsList.addItem(createCard(data));
   // закрываем попап и обнуляем поля в форме
   formAddNewCard.close();
 };
@@ -75,11 +68,9 @@ function submitFormAddNewCard(evt) {
 const cardsList = new Section({
   items: preloadedCards,
   renderer: (item) => {
-    // const cardDefault = new Card(item, template, handleCardClick);
-    // const cardElement = cardDefault.generateCard();
     cardsList.addItem(createCard(item));
   }
-}, elementsContainer);
+}, ".elements__list");
 
 cardsList.renderer();
 
@@ -91,13 +82,13 @@ function createCard(element) {
 }
 
 // инициализируем валидацию в каждой форме и запускаем
-popupTemplate.forEach(item => {
+popupTemplateList.forEach(item => {
   formValidatorList[item.name] = new FormValidator(item, selectors);
   formValidatorList[item.name].enableValidation();
 });
 
 // инициализируем класс отображения информации о пользователе
-const userInformation = new UserInfo({name: 'Mary', info: 'Poppins'});
+const userInformation = new UserInfo({selectorName: '.profile__profile-name', selectorInfo: '.profile__profile-job'});
 
 // инициализируем попап открытия картинки
 const popupWithImage = new PopupWithImage(popupPhoto);

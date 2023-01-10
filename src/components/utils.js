@@ -75,11 +75,11 @@ const popupTextLocationName = formElementAddNewCard.querySelector(".popup__input
 const popupTextUrl = formElementAddNewCard.querySelector(".popup__input_text_url");
 
 //ОБЩИЕ
-const popups = Array.from(document.querySelectorAll(".popup"));
-const popupTemplate = Array.from(document.querySelectorAll('.popup__form'));
+const popupsList = Array.from(document.querySelectorAll(".popup"));
+const popupTemplateList = Array.from(document.querySelectorAll('.popup__form'));
 const buttonCloseList = document.querySelectorAll('.popup__close');
 
 const formValidatorList = {};
 
 
-export {preloadedCards, selectors, elementsContainer, template, popupPhoto, popupPhotoRevealImageBig, popupPhotoRevealImageCaption, popupProfileChanger,  popupOpenButtonElement, profileName, profileJob, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCard, popupAddNewCardOpenButton, formElementAddNewCard, popupTextLocationName, popupTextUrl, popups, popupTemplate, buttonCloseList, formValidatorList};
+export {preloadedCards, selectors, elementsContainer, template, popupPhoto, popupPhotoRevealImageBig, popupPhotoRevealImageCaption, popupProfileChanger,  popupOpenButtonElement, profileName, profileJob, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCard, popupAddNewCardOpenButton, formElementAddNewCard, popupTextLocationName, popupTextUrl, popupsList, popupTemplateList, buttonCloseList, formValidatorList};
