@@ -1,6 +1,6 @@
 import './index.css';
 
-import {preloadedCards, selectors, elementsContainer, template, popupPhoto, popupPhotoRevealImageBig, popupPhotoRevealImageCaption, popupProfileChanger,  popupOpenButtonElement, profileName, profileJob, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCard, popupAddNewCardOpenButton, formElementAddNewCard, popupTextLocationName, popupTextUrl, popups, popupTemplateList, buttonCloseList, formValidatorList} from '../components/utils';
+import {preloadedCards, selectors, template, popupOpenButtonElement, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCardOpenButton, formElementAddNewCard, popupTemplateList, formValidatorList} from '../components/utils';
 import Card from '../components/Card';
 import FormValidator from '../components/FormValidator';
 import Section from '../components/Section';
@@ -21,9 +21,8 @@ const handleCardClick = (data) => {
 
 //Слушатели на открытие и закрытие попапа редактирования профиля
 popupOpenButtonElement.addEventListener("click", () => {
-  // заменяем значения в форме, на те, что отображабтся на странице
-  let formUserInfo = {};
-  formUserInfo = userInformation.getUserInfo();
+  // заменяем значения в форме, на те, что отображаются на странице
+  const formUserInfo = Object.assign({}, userInformation.getUserInfo());
   popupTextName.value = formUserInfo.name;
   popupTextJob.value = formUserInfo.info;
   //удаляем ошибки валидации
@@ -34,7 +33,6 @@ popupOpenButtonElement.addEventListener("click", () => {
   formProfileChanger.open();
 });
 function submitFormProfileChanger(data) {
-  console.log(data);
   // заменяем значения полей в секции profile на введенные в форме
   userInformation.setUserInfo(data);
   // закрываем попап
@@ -44,6 +42,9 @@ function submitFormProfileChanger(data) {
 
 // ПОПАП ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ-----------------------------------------------------------------------------------
 // Делаем попап добавления новой карточки: открытие попапа, закрытие попапа
+
+
+
 popupAddNewCardOpenButton.addEventListener("click", () => {
   //удаляем ошибки валидации
   formValidatorList[formElementAddNewCard.name].deleteValidityErrors();
@@ -53,8 +54,6 @@ popupAddNewCardOpenButton.addEventListener("click", () => {
   formAddNewCard.open();
 });
 
-
-// let newCardList = {};
 //функция подтверждения добавления новой карточки
 function submitFormAddNewCard(data) {
   cardsList.addItem(createCard(data));
@@ -62,7 +61,6 @@ function submitFormAddNewCard(data) {
   formAddNewCard.close();
 };
 //-------------------------------------------------------------------------------------------------------------------
-
 
 //инициализируем классы дефортных карточек
 const cardsList = new Section({
@@ -91,13 +89,13 @@ popupTemplateList.forEach(item => {
 const userInformation = new UserInfo({selectorName: '.profile__profile-name', selectorInfo: '.profile__profile-job'});
 
 // инициализируем попап открытия картинки
-const popupWithImage = new PopupWithImage(popupPhoto);
+const popupWithImage = new PopupWithImage(".popup_photo");
 popupWithImage.setEventListeners();
 
 // инициализируем попап добавления карточки
-const formAddNewCard = new PopupWithForm(popupAddNewCard, submitFormAddNewCard);
+const formAddNewCard = new PopupWithForm(".popup_add-new-card", submitFormAddNewCard);
 formAddNewCard.setEventListeners();
 
 // инициализируем попап редактирования профиля
-const formProfileChanger = new PopupWithForm(popupProfileChanger, submitFormProfileChanger);
+const formProfileChanger = new PopupWithForm(".popup_profile-changer", submitFormProfileChanger);
 formProfileChanger.setEventListeners();
