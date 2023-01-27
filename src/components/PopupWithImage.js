@@ -7,9 +7,9 @@ export default class PopupWithImage extends Popup {
     this._popupPhotoRevealImageCaption = this._popup.querySelector(".popup__image-caption");
     }
   open(data) {
-    this._popupPhotoRevealImageBig.src = data['popup-text-url'];
-    this._popupPhotoRevealImageCaption.textContent = data['popup-text-name-card'];
-    this._popupPhotoRevealImageBig.alt = `Фото в увеличенном виде - ${data['popup-text-url']}`;
+    this._popupPhotoRevealImageBig.src = data['link'];
+    this._popupPhotoRevealImageCaption.textContent = data['name'];
+    this._popupPhotoRevealImageBig.alt = `Фото в увеличенном виде - ${data['link']}`;
     super.open();
   }
 }

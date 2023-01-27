@@ -1,10 +1,15 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(data, templateSelector, handleCardClick, handleCardDelete, handlePutLike, handleDeleteLike) {
     this._data = data;
-    this._name = data['popup-text-name-card'];
-    this._link = data['popup-text-url'];
+    this._name = data['name'];
+    this._link = data['link'];
+    this._likes = data['likes'];
+    this._id = data['_id'];
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardDelete = handleCardDelete;
+    this._handlePutLike = handlePutLike;
+    this._handleDeleteLike = handleDeleteLike;
   }
 
   _getTemplate() {
@@ -13,25 +18,62 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._buttonLike = this._element.querySelector(".elements__button-like");
     this._buttonLike.addEventListener("click", () => this._likeCard());
-    this._element.querySelector(".elements__button-delete").addEventListener("click", () => this._deleteCard());
+    if (this._buttonDelete !== null) {
+      this._buttonDelete.addEventListener("click", () => {
+        /* if (this._handleCardDelete()) {
+          this._deleteCard();
+        } */
+        this._handleCardDelete(this);
+
+      });
+    }
     this._elementTopSide.addEventListener("click", () => this._handleCardClick(this._data));
   }
   _likeCard() {
     this._buttonLike.classList.toggle("elements__button-like_active");
+    if (this._buttonLike.classList.contains('elements__button-like_active')) {
+      this._handlePutLike(this._id);
+      this._likeNumber.textContent = Number(this._likeNumber.textContent) + 1;
+    } else {
+      this._handleDeleteLike(this._id);
+      this._likeNumber.textContent = Number(this._likeNumber.textContent) - 1;
+    }
   }
 
-  _deleteCard() {
+  deleteCard() {
     this._element.remove();
     this._element = null;
   }
+
+  _isLiked(data) {
+    return data['_id'] === '40b44c74ac570dae9929ab15';
+  }
+
+  _isMine() {
+    return this._data.owner['_id'] === '40b44c74ac570dae9929ab15';
+  }
+
   generateCard() {
     this._element = this._getTemplate();
+    this._buttonLike = this._element.querySelector(".elements__button-like");
+    this._buttonDelete = this._element.querySelector(".elements__button-delete");
     this._elementTopSide = this._element.querySelector(".elements__top-side");
     this._element.querySelector(".elements__caption").textContent = this._name;
     this._elementTopSide.src = this._link;
-    this._elementTopSide.alt = `Фото - ${this._link}`;
+    this._elementTopSide.alt = `Фото - ${this._name}`;
+
+    this._likeNumber = this._element.querySelector('.elements__like-number');
+    this._likeNumber.textContent = this._likes.length;
+
+    if (this._likes.some(this._isLiked)) {
+      this._buttonLike.classList.add('elements__button-like_active');
+    }
+
+    if(!this._isMine()) {
+      this._buttonDelete.remove();
+    }
+
     this._setEventListeners();
     return this._element;
   }

@@ -15,14 +15,16 @@
     <main>
       <section class="profile">
         <div class="profile__card">
-          <img
-            src="<%=require('./images/body/profile/__avatar/profile__avatar.png')%>"
+          <div class="profile__edit-avatar">
+            <img
+            src="#"
             alt="Ваш аватар"
             class="profile__avatar">
+          </div>
           <div class="profile__profile-info">
             <div class="profile__profile-texts">
-              <h1 class="profile__profile-name">Жак-Ив Кусто</h1>
-              <p class="profile__profile-job">Исследователь океана</p>
+              <h1 class="profile__profile-name"></h1>
+              <p class="profile__profile-job"></p>
             </div>
             <button
               class="profile__edit-button transition-button"
@@ -43,6 +45,25 @@
     <footer class="footer">
       <p class="footer__copyright">© 2022 Александр&nbsp;Макаров</p>
     </footer>
+    <section class="popup popup_avatar-changer">
+      <div class="popup__container">
+        <button class="popup__close transition-button" type="reset"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" name="form-avatar-changer" novalidate>
+          <input
+          name="link-avatar"
+          class="popup__input popup__input_text_url"
+          type="url"
+          placeholder="Ссылка на картинку"
+          autocomplete="off"
+          required>
+          <span class="popup__error link-avatar-error"></span>
+          <button type="submit" class="popup__button transition-button">
+          Сохранить
+          </button>
+        </form>
+      </div>
+    </section>
     <section class="popup popup_profile-changer">
       <div class="popup__container">
         <button class="popup__close transition-button" type="reset"></button>
@@ -74,13 +95,24 @@
         </form>
       </div>
     </section>
+    <section class="popup popup_submit">
+      <div class="popup__container">
+        <button class="popup__close transition-button" type="reset"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form class="popup__form" name="form-submit" novalidate>
+          <button type="submit" class="popup__button transition-button">
+          Да
+          </button>
+        </form>
+      </div>
+    </section>
     <section class="popup popup_add-new-card">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="form-new-card" novalidate>
           <button class="popup__close transition-button" type="reset"></button>
           <input
-          name="popup-text-name-card"
+          name="name"
           class="popup__input popup__input_text_name-location"
           type="text"
           placeholder="Название"
@@ -88,15 +120,15 @@
           minlength="2"
           maxlength="30"
           required>
-          <span class="popup__error popup-text-name-card-error"></span>
+          <span class="popup__error name-error"></span>
           <input
-          name="popup-text-url"
+          name="link"
           class="popup__input popup__input_text_url"
           type="url"
           placeholder="Ссылка на картинку"
           autocomplete="off"
           required>
-          <span class="popup__error popup-text-url-error"></span>
+          <span class="popup__error link-error"></span>
           <button type="submit" class="popup__button transition-button">
           Создать
           </button>
@@ -124,10 +156,13 @@
             alt="">
           <div class="elements__bottom-side">
             <h2 class="elements__caption"></h2>
-            <button
+            <div>
+              <button
               class="elements__button-like transition-button"
               type="button"
-            ></button>
+              ></button>
+              <p class="elements__like-number">5</p>
+            </div>
           </div>
         </article>
       </li>

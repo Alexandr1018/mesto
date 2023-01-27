@@ -15,4 +15,4 @@
 - адаптирован под разрешения от 320px до 1280px;
 - подключен JS с возможностью открывать всплывающее окно и редактировать профиль.
 
-4. [ссылка на gh-pages](https://alexandr1018.github.io/Mesto-Russia/index.html)
+4. [ссылка на gh-pages](https://alexandr1018.github.io/mesto/)

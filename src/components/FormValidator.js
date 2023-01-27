@@ -44,6 +44,7 @@ export default class FormValidator {
   _showErrorMessage(inputElement) {
     this._popupError = this._formElement.querySelector(`.${inputElement.name}-error`)
     inputElement.classList.add(this._classInputTypeError);
+    // debugger;
     this._popupError.textContent = inputElement.validationMessage;
     this._popupError.classList.add(this._classErrorVisible);
   }
@@ -51,6 +52,7 @@ export default class FormValidator {
   _hideErrorMessage(inputElement) {
     this._popupError = this._formElement.querySelector(`.${inputElement.name}-error`)
     inputElement.classList.remove(this._classInputTypeError);
+    //debugger;
     this._popupError.textContent = "";
     this._popupError.classList.remove(this._classErrorVisible);
   }

@@ -1,20 +1,15 @@
 import './index.css';
 
-import {preloadedCards, selectors, template, popupOpenButtonElement, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCardOpenButton, formElementAddNewCard, popupTemplateList, formValidatorList} from '../components/utils';
+import {selectors, template, popupOpenButtonElement, formElementProfileChanger, popupTextName, popupTextJob, popupAddNewCardOpenButton, formElementAddNewCard, popupTemplateList, formValidatorList, profileName, profileAbout, profileAvatar, popupAvatarPhoto, formElementAvatarChanger, avatarImage} from '../components/utils';
 import Card from '../components/Card';
 import FormValidator from '../components/FormValidator';
 import Section from '../components/Section';
 import PopupWithImage from '../components/PopupWithImage';
 import UserInfo from '../components/UserInfo';
 import PopupWithForm from '../components/PopupWithForm';
+import PopupWithConfirmation from '../components/PopupWithConfirmation';
+import Api from '../components/Api';
 
-
-
-//ПОПАП увеличения картинки -------------------------------------------------------------------------------------------------------------------
-const handleCardClick = (data) => {
-  popupWithImage.open(data);
-}
-//-------------------------------------------------------------------------------------------------------------------
 
 // ПОПАП редактирования профиля--------------------------------------------------------------------------------------
 // Делаем попап редактирования профиля: открытие попапа, закрытие попапа
@@ -22,7 +17,7 @@ const handleCardClick = (data) => {
 //Слушатели на открытие и закрытие попапа редактирования профиля
 popupOpenButtonElement.addEventListener("click", () => {
   // заменяем значения в форме, на те, что отображаются на странице
-  const formUserInfo = Object.assign({}, userInformation.getUserInfo());
+  const formUserInfo = userInformation.getUserInfo();
   popupTextName.value = formUserInfo.name;
   popupTextJob.value = formUserInfo.info;
   //удаляем ошибки валидации
@@ -33,8 +28,16 @@ popupOpenButtonElement.addEventListener("click", () => {
   formProfileChanger.open();
 });
 function submitFormProfileChanger(data) {
+  formProfileChanger.downloadButton(true);
+  api.setUserInfoServer(data)
+  .then(() => {
+    userInformation.setUserInfo(data);
+  }).catch(err => {
+    console.log(err);
+  }).finally(() => {
+    formProfileChanger.downloadButton(false);
+  });
   // заменяем значения полей в секции profile на введенные в форме
-  userInformation.setUserInfo(data);
   // закрываем попап
   formProfileChanger.close();
 };
@@ -56,28 +59,90 @@ popupAddNewCardOpenButton.addEventListener("click", () => {
 
 //функция подтверждения добавления новой карточки
 function submitFormAddNewCard(data) {
-  cardsList.addItem(createCard(data));
-  // закрываем попап и обнуляем поля в форме
+  formAddNewCard.downloadButton(true);
+  api.postNewCardServer(data)
+  .then(res => {
+    const newCard = new Section({
+      items: res
+    }, ".elements__list");
+    newCard.addItem(createCard(res));
+
+  }).catch(err => {
+    console.log(err);
+  }).finally(() => {
+    formAddNewCard.downloadButton(false);
+  });
   formAddNewCard.close();
 };
 //-------------------------------------------------------------------------------------------------------------------
 
-//инициализируем классы дефортных карточек
-const cardsList = new Section({
-  items: preloadedCards,
-  renderer: (item) => {
-    cardsList.addItem(createCard(item));
-  }
-}, ".elements__list");
+// ПОПАП ЗАМЕНЫ АВАТАРА-----------------------------------------------------------------------------------
 
-cardsList.renderer();
+
+popupAvatarPhoto.addEventListener('click', () => {
+  //удаляем ошибки валидации
+  formValidatorList[formElementAvatarChanger.name].deleteValidityErrors();
+  //делаем кнопку сабмита неактивной
+  formValidatorList[formElementAvatarChanger.name].disableButtonSubmit();
+  formAvatarChanger.open();
+});
+
+function submitFormAvatarChanger(data) {
+  formAvatarChanger.downloadButton(true);
+  api.setUserAvatarServer(data['link-avatar'])
+  .then(() => {
+    avatarImage.src = data['link-avatar'];
+  }).catch(err => {
+    console.log(err);
+  }).finally(() => {
+    formAvatarChanger.downloadButton(false);
+  })
+  formAvatarChanger.close();
+}
+
+//-------------------------------------------------------------------------------------------------------------------
+
 
 // функция создания карточки
 function createCard(element) {
-  const cardsDefault = new Card (element, template, handleCardClick);
+  const cardsDefault = new Card (element, template, handleCardClick, handleCardDelete, handlePutLike, handleDeleteLike);
   const cardElement = cardsDefault.generateCard();
   return cardElement;
 }
+
+const handleCardClick = (data) => {
+  popupWithImage.open(data);
+}
+
+
+const handleCardDelete = (card) => {
+  popupWithConfirmation.open();
+  popupWithConfirmation.setEventListeners(() => {
+    api.deleteCardServer(card['_id'])
+    .then(() => {
+    card.deleteCard();
+    popupWithConfirmation.close();
+  }).catch(err => {
+    console.log(err);
+  });
+  });
+}
+
+const handlePutLike = (data) => {
+  api.postLikeServer(data)
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+const handleDeleteLike = (data) => {
+  api.deleteLikeServer(data)
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+
 
 // инициализируем валидацию в каждой форме и запускаем
 popupTemplateList.forEach(item => {
@@ -99,3 +164,42 @@ formAddNewCard.setEventListeners();
 // инициализируем попап редактирования профиля
 const formProfileChanger = new PopupWithForm(".popup_profile-changer", submitFormProfileChanger);
 formProfileChanger.setEventListeners();
+
+
+// инициализируем попап редактирования аватарки
+const formAvatarChanger = new PopupWithForm(".popup_avatar-changer", submitFormAvatarChanger);
+formAvatarChanger.setEventListeners();
+
+const popupWithConfirmation = new PopupWithConfirmation(".popup_submit");
+
+
+const api = new Api ({
+  url: 'https://nomoreparties.co/v1/cohort-57',
+  headers: {
+    authorization: '4873e823-ccc0-45af-addc-f805bcf9ef38',
+    'Content-Type': 'application/json'
+  }
+});
+
+
+//загрузка карточек с сервера
+api.getCardsServer().then(data => {
+  const allCards = new Section({
+    items: data,
+    renderer: (item) => {
+      allCards.addItem(createCard(item));
+    }
+    }, ".elements__list");
+  allCards.renderer();
+}).catch(err => console.log(err));
+
+
+//загрузка и установка инфы о пользователе
+api.getUserInfoServer().then(data => {
+  profileName.textContent = data.name;
+  profileAbout.textContent = data.about;
+  profileAvatar.src = data.avatar;
+}).catch(err => console.log(err));
+
+
+
