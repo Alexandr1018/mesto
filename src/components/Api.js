@@ -4,18 +4,21 @@ export default class Api {
     this._headers = config.headers;
   }
 
-   getUserInfoServer() {
+_checkStatus(status) {
+    if(status.ok) {
+      return status.json();
+    } else {
+      return Promise.reject("Произошла ошибка");
+    }
+  }
+
+  getUserInfoServer() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: this._headers
-    })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject("Произошла ошибка");
-        }
-      });
+    }).then(res => {
+     return this._checkStatus(res);
+    });
   }
 
   getCardsServer() {
@@ -23,11 +26,7 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     }).then(res => {
-      if(res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject("Произошла ошибка");
-      }
+      return this._checkStatus(res);
     });
   }
 
@@ -40,11 +39,7 @@ export default class Api {
         about: data['popup-text-job']
       })
     }).then(res => {
-      if(res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject("Произошла ошибка");
-      }
+      return this._checkStatus(res);
     });
   }
 
@@ -56,11 +51,7 @@ export default class Api {
         avatar: data
       })
     }).then(res => {
-      if(res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject("Произошла ошибка");
-      }
+      return this._checkStatus(res);
     });
   }
 
@@ -73,11 +64,7 @@ export default class Api {
         link: data.link
       })
     }).then(res => {
-      if(res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject("Произошла ошибка");
-      }
+      return this._checkStatus(res);
     });
   }
 
@@ -86,11 +73,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
     }).then(res => {
-      if(res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject("Произошла ошибка");
-      }
+      return this._checkStatus(res);
     });
   }
 
@@ -99,11 +82,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     }).then(res => {
-      if(res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject("Произошла ошибка");
-      }
+      return this._checkStatus(res);
     });
   }
 
@@ -112,11 +91,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     }).then(res => {
-      if(res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject("Произошла ошибка");
-      }
+      return this._checkStatus(res);
     });
   }
 

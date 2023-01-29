@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick, handleCardDelete, handlePutLike, handleDeleteLike) {
+  constructor(data, templateSelector, handleCardClick, handleCardDelete, handlePutLike, handleDeleteLike, ownerId) {
     this._data = data;
     this._name = data['name'];
     this._link = data['link'];
@@ -10,6 +10,7 @@ export default class Card {
     this._handleCardDelete = handleCardDelete;
     this._handlePutLike = handlePutLike;
     this._handleDeleteLike = handleDeleteLike;
+    this._ownerId = ownerId;
   }
 
   _getTemplate() {
@@ -46,12 +47,13 @@ export default class Card {
     this._element = null;
   }
 
-  _isLiked(data) {
-    return data['_id'] === '40b44c74ac570dae9929ab15';
-  }
+ /*  _isLiked(data) {
+    // console.log(data['_id']);
+    return data['_id'] === this._ownerId;
+  } */
 
   _isMine() {
-    return this._data.owner['_id'] === '40b44c74ac570dae9929ab15';
+    return this._data.owner['_id'] === this._ownerId;
   }
 
   generateCard() {
@@ -66,7 +68,7 @@ export default class Card {
     this._likeNumber = this._element.querySelector('.elements__like-number');
     this._likeNumber.textContent = this._likes.length;
 
-    if (this._likes.some(this._isLiked)) {
+    if (this._likes.some(like => like._id === this._ownerId)) {
       this._buttonLike.classList.add('elements__button-like_active');
     }
 
